@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610123602) do
+ActiveRecord::Schema.define(version: 20180717135932) do
 
   create_table "badges", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 20180610123602) do
     t.string  "effect"
     t.integer "quest_id"
     t.text    "description"
+    t.integer "maintenance_quest_id", default: 0
+    t.integer "timeout",              default: 1
+    t.index ["maintenance_quest_id"], name: "index_buffs_on_maintenance_quest_id"
     t.index ["quest_id"], name: "index_buffs_on_quest_id"
   end
 
