@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717135932) do
+ActiveRecord::Schema.define(version: 20180809142751) do
 
   create_table "badges", force: :cascade do |t|
     t.string "name"
     t.text   "description"
+    t.string "color",       default: "copper"
   end
 
   create_table "buffs", force: :cascade do |t|
@@ -46,6 +47,11 @@ ActiveRecord::Schema.define(version: 20180717135932) do
     t.integer "evidence_level", default: 0
     t.integer "quest_id"
     t.index ["quest_id"], name: "index_resource_items_on_quest_id"
+  end
+
+  create_table "scrolls", force: :cascade do |t|
+    t.string "name"
+    t.text   "effect"
   end
 
   create_table "users", force: :cascade do |t|
