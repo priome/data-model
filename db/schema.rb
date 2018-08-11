@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180811080104) do
+ActiveRecord::Schema.define(version: 20180811094447) do
 
   create_table "badges", force: :cascade do |t|
     t.string "name"
@@ -18,18 +18,28 @@ ActiveRecord::Schema.define(version: 20180811080104) do
     t.string "color",       default: "copper"
   end
 
+  create_table "buff_effects", force: :cascade do |t|
+    t.integer "buff_id"
+    t.integer "effect_id"
+    t.decimal "amount",    precision: 3, scale: 2
+    t.index ["buff_id"], name: "index_buff_effects_on_buff_id"
+    t.index ["effect_id"], name: "index_buff_effects_on_effect_id"
+  end
+
   create_table "buffs", force: :cascade do |t|
     t.string  "name"
-    t.string  "effect"
     t.integer "quest_streak_id"
     t.text    "description"
-    t.integer "timeout",         default: 1
     t.index ["quest_streak_id"], name: "index_buffs_on_quest_streak_id"
   end
 
   create_table "daily_quests", force: :cascade do |t|
     t.string "name"
     t.text   "description"
+  end
+
+  create_table "effects", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "quest_streaks", force: :cascade do |t|
