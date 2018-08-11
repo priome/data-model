@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180809142751) do
+ActiveRecord::Schema.define(version: 20180811080104) do
 
   create_table "badges", force: :cascade do |t|
     t.string "name"
@@ -21,23 +21,21 @@ ActiveRecord::Schema.define(version: 20180809142751) do
   create_table "buffs", force: :cascade do |t|
     t.string  "name"
     t.string  "effect"
-    t.integer "quest_id"
+    t.integer "quest_streak_id"
     t.text    "description"
-    t.integer "maintenance_quest_id", default: 0
-    t.integer "timeout",              default: 1
-    t.index ["maintenance_quest_id"], name: "index_buffs_on_maintenance_quest_id"
-    t.index ["quest_id"], name: "index_buffs_on_quest_id"
+    t.integer "timeout",         default: 1
+    t.index ["quest_streak_id"], name: "index_buffs_on_quest_streak_id"
   end
 
-  create_table "quest_types", force: :cascade do |t|
+  create_table "daily_quests", force: :cascade do |t|
     t.string "name"
+    t.text   "description"
   end
 
-  create_table "quests", force: :cascade do |t|
-    t.string  "name"
-    t.text    "description"
-    t.integer "quest_type_id"
-    t.index ["quest_type_id"], name: "index_quests_on_quest_type_id"
+  create_table "quest_streaks", force: :cascade do |t|
+    t.integer "daily_quest_id"
+    t.integer "days",           default: 7
+    t.index ["daily_quest_id"], name: "index_quest_streaks_on_daily_quest_id"
   end
 
   create_table "resource_items", force: :cascade do |t|
